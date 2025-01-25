@@ -1,3 +1,15 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { PatientsComponent } from './patients/patients.component';
+import { AuthGuard } from './auth.guard';
 
-export const routes: Routes = [];
+export const appRoutes: Routes = [
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent }, // Login route
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'patients', component: PatientsComponent, canActivate: [AuthGuard] },
+
+  ];
+
+// export const AppRoutingModule = RouterModule.forRoot(appRoutes);

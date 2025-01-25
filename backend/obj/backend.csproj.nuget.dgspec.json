@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\backend.csproj": {}
+    "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\backend.csproj": {
+    "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\backend.csproj",
-        "projectName": "backend",
-        "projectPath": "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\Backend.csproj",
+        "projectName": "Backend",
+        "projectPath": "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\Backend.csproj",
         "packagesPath": "C:\\Users\\krish\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\krish\\OneDrive\\Desktop\\mPath_Assessment_Krisha_Kiran_Shah\\PatientCareManager\\backend\\obj\\",
         "projectStyle": "PackageReference",
@@ -40,9 +40,21 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[7.2.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.3.1, )"
             }
           },
           "imports": [
