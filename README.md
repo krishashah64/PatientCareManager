@@ -4,16 +4,10 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 ## Features
 
 🔍 Search Patients by name or other details
-
 📊 Sort & Filter patient records
-
 📑 Pagination for large datasets
-
 ✅ Update Recommendation Status
-
 🔄 API Integration for fetching and updating patient data
-
-
 
 ## Technologies Used
 
@@ -27,10 +21,17 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 ### **Backend (.NET)**
 - .NET Core / .NET 8
 - C#
-- Entity Framework Core
-- SQL Server 
+- Entity Framework Core 
 - ASP.NET Web API
 
+### **Database**
+- SQL Server
+
+### **Authentication:** 
+- JWT-based authentication
+- 
+### **API Documentation:** 
+- Swagger / OpenAPI
 
 
 ### **Prerequisites**
@@ -40,6 +41,11 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - SQL Server
 
+## Architecture Overview
+- **Frontend (Angular):** Handles UI and API communication.
+- **Backend (.NET Core Web API):** Implements business logic and database interactions.
+- **Database (SQL Server):** Stores patient data.
+- **Security:** Includes JWT authentication, role-based access, and protection against SQL Injection & XSS.
 
 
 ## Setup Instructions
