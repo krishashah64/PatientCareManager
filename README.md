@@ -13,7 +13,7 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 
 🔄 API Integration for fetching and updating patient data
 
----
+
 
 ## Technologies Used
 
@@ -31,7 +31,7 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 - SQL Server 
 - ASP.NET Web API
 
----
+
 
 ### **Prerequisites**
 
@@ -40,7 +40,7 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - SQL Server
 
---- 
+
 
 ## Setup Instructions
 
