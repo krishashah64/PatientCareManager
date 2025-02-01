@@ -4,9 +4,13 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 ## Features
 
 🔍 Search Patients by name or other details
+
 📊 Sort & Filter patient records
+
 📑 Pagination for large datasets
+
 ✅ Update Recommendation Status
+
 🔄 API Integration for fetching and updating patient data
 
 
