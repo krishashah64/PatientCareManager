@@ -57,25 +57,25 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 ## Setup Instructions
 
 ### **Backend Setup (.NET)**
-1. Clone the repository:
+**1. Clone the repository:**
    - git clone https://github.com/krishashah64/PatientCareManager.git
    - cd PatientCareManager/backend
-3. Restore dependencies:
+**2. Restore dependencies:**
    - dotnet restore
-4. Update appsettings.json with your database connection details.
-5. Run database migrations
+**3. Update appsettings.json with your database connection details.**
+**4. Run database migrations**
    - dotnet ef database update
-6. Start the backend server:
+**5. Start the backend server:**
    - dotnet run
 
 ### **Frontend Setup (Angular)**
-1. Navigate to the frontend directory:
+**1. Navigate to the frontend directory:**
    - cd ../frontend
-2. Install dependencies:
+**2. Install dependencies:**
    - npm install
-3. Start the Angular development server:
+**3. Start the Angular development server:**
    - ng serve
-4. Open the application in your browser:
+**4. Open the application in your browser:**
    - http://localhost:4200
 
 
