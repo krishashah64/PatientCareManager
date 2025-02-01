@@ -48,12 +48,12 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 1. Clone the repository:
    git clone https://github.com/krishashah64/PatientCareManager.git
    cd PatientCareManager/backend
-2. Restore dependencies:
+3. Restore dependencies:
     dotnet restore
-3. Update appsettings.json with your database connection details.
-4. Run database migrations
+4. Update appsettings.json with your database connection details.
+5. Run database migrations
     dotnet ef database update
-5. Start the backend server:
+6. Start the backend server:
     dotnet run
 
 ### **Frontend Setup (Angular)**
