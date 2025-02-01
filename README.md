@@ -58,12 +58,12 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 
 ### **Frontend Setup (Angular)**
 1. Navigate to the frontend directory:
-    cd ../frontend
+   - cd ../frontend
 2. Install dependencies:
-    npm install
+   - npm install
 3. Start the Angular development server:
-    ng serve
+   - ng serve
 4. Open the application in your browser:
-    http://localhost:4200
+   - http://localhost:4200
 
 
