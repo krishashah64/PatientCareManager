@@ -9,6 +9,7 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 ✅ Update Recommendation Status
 🔄 API Integration for fetching and updating patient data
 
+
 ## Technologies Used
 
 ### **Frontend (Angular)**
@@ -29,7 +30,7 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 
 ### **Authentication:** 
 - JWT-based authentication
-- 
+  
 ### **API Documentation:** 
 - Swagger / OpenAPI
 
@@ -40,6 +41,7 @@ A healthcare-focused full-stack web application built with **.NET (C#) for the b
 - [Angular CLI](https://angular.io/cli)  
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - SQL Server
+
 
 ## Architecture Overview
 - **Frontend (Angular):** Handles UI and API communication.
