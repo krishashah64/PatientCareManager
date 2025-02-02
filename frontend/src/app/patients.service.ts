@@ -17,4 +17,13 @@ export class PatientsService {
       tap(data => console.log('Patients data fetched:', data))
     );
   }
+
+  updatePatient(patient: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${patient.id}`, patient);
+  }
+
+  // Method to update the recommendation status
+  updateRecommendationStatus(recommendationId: number, isCompleted: boolean): Observable<any> {
+    return this.http.put(`/api/patients/recommendation/${recommendationId}`, { isCompleted });
+  }
 }

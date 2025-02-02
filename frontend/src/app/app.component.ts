@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-// import { AboutComponent } from './about.component';
 import { CommonModule } from '@angular/common';
 import { PatientsComponent } from './patients/patients.component';
 import { AuthService } from './auth.service';
@@ -15,17 +11,6 @@ import { AuthService } from './auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-// export class AppComponent implements OnInit {
-//   weatherData: any[] = [];
-
-//   constructor(private weatherService: WeatherService) {}
-
-//   ngOnInit(): void {
-//     this.weatherService.getWeatherForecast().subscribe((data) => {
-//       this.weatherData = data;
-//     });
-//   }
-// }
 
 export class AppComponent {
   title = 'PatientCareManager';

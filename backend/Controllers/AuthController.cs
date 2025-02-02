@@ -4,6 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using DotNetEnv;
+using Backend.Data;
+using BCrypt.Net;
+using Microsoft.EntityFrameworkCore;
+using System; 
+using System.Linq; 
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Backend.Controllers
 {
@@ -13,34 +20,79 @@ namespace Backend.Controllers
     {   
 
         private readonly ILogger<AuthController> _logger;
+        private readonly AppDbContext _context;
+        private readonly IConfiguration _config;
 
-        // Inject ILogger into the constructor
-        public AuthController(ILogger<AuthController> logger)
+         public AuthController(AppDbContext context, IConfiguration config, ILogger<AuthController> logger)
         {
+            _context = context;
+            _config = config;
             _logger = logger;
         }
 
-        // POST: api/auth/login
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(User request)
+        {
+            if (await _context.Users.AnyAsync(u => u.Email == request.Email))
+            {
+                return BadRequest("User already exists.");
+            }
+    
+            var passwordSalt = BCrypt.Net.BCrypt.GenerateSalt();
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password, passwordSalt);
+
+            var user = new User
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Gender = request.Gender,
+                Email = request.Email,
+                DateOfBirth = request.DateOfBirth,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Role = request.Role,
+                AccountStatus = request.AccountStatus,
+            };
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return Ok("User registered successfully.");
+        }
+
+
         [HttpPost("login")]
-        public IActionResult Login([FromBody] UserLogin loginRequest)
+        public async Task<IActionResult> Login([FromBody] UserLogin loginRequest)
         {
             if (loginRequest == null)
             {
-                Console.WriteLine("Invalid login attempt");
+                _logger.LogWarning("Invalid login attempt: null request");
                 return BadRequest("Invalid login request");
             }
 
-            string username = loginRequest.Username;
-            string password = loginRequest.Password;
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(loginRequest.Password, user.PasswordHash))
+            {
+                _logger.LogWarning($"Invalid login attempt for user: {loginRequest.Email}");
+                return Unauthorized("Invalid credentials");
+            }
+            _logger.LogInformation($"Login successful for user: {user.Email}");
 
+            // Generate JWT token
+            string token = GenerateJwtToken(user);
 
-            Console.WriteLine("Login successful");
-
-            //generate JWT token
-            string token = GenerateJwtToken(username);
-
-            return Ok(new { Token = token });
+          return Ok(new 
+            {
+                Token = token,
+                User = new
+                {
+                    user.FirstName,
+                    user.LastName,
+                    user.Email,
+                    user.Role
+                }
+            });
         }
+
 
         [HttpPost("logout")]
         public IActionResult Logout()
@@ -51,42 +103,46 @@ namespace Backend.Controllers
             
         }
 
-        public string GenerateJwtToken(string username)
+
+        private string GetJwtSecret()
         {
-            //secret key
             var secretKey = Environment.GetEnvironmentVariable("JWT_KEY");
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            if (string.IsNullOrEmpty(secretKey))
+            {
+                throw new Exception("JWT_KEY is not set in the environment variables.");
+            }
+            return secretKey;
+        }
 
-            //signing credentials
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        private string GenerateJwtToken(User user)
+        {
+           
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GetJwtSecret()));
 
-            // claims (data inside the JWT)
             var claims = new[]
             {
-                new Claim(ClaimTypes.Name, username)
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Role, user.Role) //RBAC
             };
 
-            // Creating the token
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
             var tokenDescriptor = new JwtSecurityToken(
-                issuer: "PatientCareManager",  // API issuer
-                audience: "frontend",  // API audience
+                issuer: _config["Jwt:Issuer"],
+                audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(30),  // sets expiration time for the token
+                expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credentials
             );
 
-            // Generate the JWT token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.WriteToken(tokenDescriptor);
-
-            return token;
+            return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
     }
 
     // UserLogin class for capturing login request
     public class UserLogin
     {
-        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
     }
 }

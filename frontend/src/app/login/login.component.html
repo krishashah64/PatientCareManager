@@ -9,12 +9,12 @@
     <form (ngSubmit)="login()" #loginForm="ngForm">
       <!-- Username Field -->
       <div class="mb-4">
-        <label for="username" class="block text-sm font-medium text-gray-600 mb-1">Username</label>
+        <label for="username" class="block text-sm font-medium text-gray-600 mb-1">Email</label>
         <input
           type="text"
-          id="username"
-          name="username"
-          [(ngModel)]="username"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
           required
           #usernameField="ngModel"
           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
@@ -23,7 +23,7 @@
           *ngIf="usernameField.invalid && usernameField.touched"
           class="text-sm text-red-500 mt-1"
         >
-          Username is required
+          Email is required
         </p>
       </div>
 

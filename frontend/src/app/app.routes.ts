@@ -5,11 +5,20 @@ import { PatientsComponent } from './patients/patients.component';
 import { AuthGuard } from './auth.guard';
 
 export const appRoutes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { 
+      path: '', 
+      redirectTo: '/login', 
+      pathMatch: 'full' 
+    },
+
+
     { path: 'login', component: LoginComponent }, // Login route
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'patients', component: PatientsComponent, canActivate: [AuthGuard] },
+
+    { 
+      path: 'patients', 
+      component: PatientsComponent, 
+      // canActivate: [AuthGuard],
+      data: { roles: ['admin', 'healthcareprofessional'] }  
+    },
 
   ];
-
-// export const AppRoutingModule = RouterModule.forRoot(appRoutes);

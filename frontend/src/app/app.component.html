@@ -1,33 +1,15 @@
-<!-- 
-<main class="main">
-  <div class="content">
-      <h1>Hello</h1>
-      <a routerLink="/" routerLinkActive="active">Home</a>
-      <a routerLink="/login" routerLinkActive="active">Login</a>
-      <button (click)="logout()">Logout</button>
-  </div>
-</main>
-
-<router-outlet /> -->
-
-<!-- <app-patients></app-patients> -->
-
-<!-- Weather Forecast Section -->
-
 <main class="main">
   <nav class="bg-blue-500 p-4 shadow-lg">
     <div class="container mx-auto flex items-center justify-between">
       <h1 class="text-white text-xl font-semibold">PatientCareManager</h1>
       <div class="space-x-4">
-        <a routerLink="/" routerLinkActive="active" class="text-white hover:text-yellow-300">Home</a>
-        <a routerLink="/login" *ngIf="!isLoggedIn" routerLinkActive="active" class="text-white hover:text-yellow-300">Login</a>
+        <a routerLink="/login" *ngIf="!isLoggedIn" routerLinkActive="active" class="text-white hover:text-yellow-300 mx-4">Login</a>
         <button (click)="logout()" *ngIf="isLoggedIn" class="text-white hover:text-yellow-300 bg-red-600 px-4 py-2 rounded-lg">Logout</button>
       </div>
     </div>
   </nav>
   <div class="content mt-8">
     <router-outlet /> 
-
   </div>
 </main>
 
