@@ -4,21 +4,43 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
 
 DotNetEnv.Env.Load();
 
-
-
 builder.Services.AddControllers();
 
 builder.Configuration.AddEnvironmentVariables();
 
+builder.Services.AddEndpointsApiExplorer();
 
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseSqlServer(connectionString));
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "PatientCareManager API",
+        Version = "v1",
+        Description = "API documentation for PatientCareManager system",
+        Contact = new OpenApiContact
+        {
+            Name = "Krisha Shah",
+            Email = "krishashah@example.com",
+            Url = new Uri("https://github.com/krishashah64/PatientCareManager")
+        }
+        
+    });
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        c.IncludeXmlComments(xmlPath);
+});
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -59,7 +81,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "PatientCareManager API v1");
+        c.RoutePrefix = string.Empty;
+    });
 }
 
 app.UseCors("AllowAngular");
