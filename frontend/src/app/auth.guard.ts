@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
     const userRole = this.authService.getRole(); // Get user role from AuthService
+    console.log("UserRole-------", userRole);
     const requiredRoles: string[] = route.data['roles']; // Get required roles from route
 
     if (!this.authService.isLoggedIn()) {

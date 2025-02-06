@@ -6,6 +6,7 @@ import { map, catchError } from 'rxjs/operators';
 
 interface LoginResponse {
   token: string;
+  user: { role: string };
 }
 
 @Injectable({
@@ -16,6 +17,7 @@ export class AuthService {
   private apiUrl = 'https://localhost:7151/auth/login'; // Adjust to your API URL
   private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   private userRole: string | null = this.getRole(); // Store role in memory
+  
 
   // Observable to track login state
   loggedIn$ = this.loggedInSubject.asObservable();
@@ -32,9 +34,9 @@ export class AuthService {
           const decodedToken = this.decodeToken(response.token);
           this.userRole = decodedToken?.role || null;
           if (this.userRole) {
-            localStorage.setItem('role', this.userRole);
+            localStorage.setItem('role', response.user.role);
           }
-
+          console.log(this.userRole);
           this.loggedInSubject.next(true);
         }
         return response;

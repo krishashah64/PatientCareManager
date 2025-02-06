@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 
 interface LoginResponse {
-  token: string;
+  token: string,
+  user: { role: string };
 }
 
 @Component({
@@ -34,7 +35,9 @@ export class LoginComponent {
     this.authService.login(this.email, this.password).subscribe(
       (response: LoginResponse) => {
         // Store the JWT token in localStorage
+        console.log("response.user.role-------", response.user.role);
         localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.user.role);
         this.authService.updateLoginState(true);
         this.router.navigate(['/patients']); // Redirect to the list of patients after successful login
       },

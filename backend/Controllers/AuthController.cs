@@ -75,7 +75,7 @@ namespace Backend.Controllers
                 _logger.LogWarning($"Invalid login attempt for user: {loginRequest.Email}");
                 return Unauthorized("Invalid credentials");
             }
-            _logger.LogInformation($"Login successful for user: {user.Email}");
+            _logger.LogInformation($"Login successful for user: {user.Role}");
 
             // Generate JWT token
             string token = GenerateJwtToken(user);
