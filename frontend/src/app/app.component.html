@@ -1,5 +1,6 @@
 <main class="main">
-  <nav class="bg-blue-500 p-4 shadow-lg">
+  <!-- Fixed Navbar -->
+  <nav class="bg-blue-500 p-4 shadow-lg fixed top-0 left-0 right-0 z-10">
     <div class="container mx-auto flex items-center justify-between">
       <h1 class="text-white text-xl font-semibold">PatientCareManager</h1>
       <div class="space-x-4">
@@ -8,9 +9,9 @@
       </div>
     </div>
   </nav>
-  <div class="content mt-8">
+  
+  <!-- Content Below the Navbar -->
+  <div class="content">
     <router-outlet /> 
   </div>
 </main>
-
-
